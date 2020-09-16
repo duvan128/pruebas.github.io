@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+
+  <body>
+    <button type="button" name="calcular" onclick="meterfilas()">
+      agregar alumno
+    </button>
+    <button type="button" name="calcular" onclick="promedio()">calcular</button>
+    <table id="tabla">
+      <thead>
+        <th>Nombre</th>
+        <th>Nota 1</th>
+        <th>Nota 2</th>
+        <th>Nota 3</th>
+        <th>Nota 4</th>
+        <th>Promedio</th>
+      </thead>
+    </table>
+    <p>
+      promedio general <span class="label" id="promedio-general">####</span>
+    </p>
+
+    <script type="text/javascript">
+      var fila = 0;
+
+      function meterfilas() {
+        var table = document.getElementById("tabla");
+
+        var row = table.insertRow(1);
+
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        cell1.innerHTML =
+          '<input class="" type="text" id="celda0-' + fila + '" value="">';
+        cell2.innerHTML =
+          '<input class="" type="text" id="celda1-' + fila + '" value="">';
+        cell3.innerHTML =
+          '<input class="" type="text" id="celda2-' + fila + '" value="">';
+        cell4.innerHTML =
+          '<input class="" type="text" id="celda3-' + fila + '" value="">';
+        cell5.innerHTML =
+          '<input class="" type="text" id="celda4-' + fila + '" value="">';
+        cell6.innerHTML =
+          '<span class="label" id="celda5-' + fila + '"></span>';
+
+        fila++;
+      }
+
+      function promedio() {
+        var sumar = 0,
+          nota1 = 0,
+          nota2 = 0,
+          nota3 = 0,
+          nota4 = 0,
+          promedio = 0,
+          sumaprom = 0,
+          promgral = 0;
+        for (var r = 0; r < fila; r++) {
+          sumar = 0;
+          nota1 = parseFloat(document.getElementById("celda1" + "-" + r).value);
+          nota2 = parseFloat(document.getElementById("celda2" + "-" + r).value);
+          nota3 = parseFloat(document.getElementById("celda3" + "-" + r).value);
+          nota4 = parseFloat(document.getElementById("celda4" + "-" + r).value);
+
+          sumar = nota1 + nota2 + nota3 + nota4;
+          console.log("sumar = " + sumar);
+
+          promedio = sumar / 4;
+
+          sumaprom = sumaprom + promedio;
+          console.log(sumaprom);
+          document.getElementById("celda5" + "-" + r).innerHTML = promedio;
+        }
+
+        promgral = sumaprom / fila;
+        document.getElementById("promedio-general").innerHTML = promgral;
+      }
+    </script>
+  </body>
+</html>
